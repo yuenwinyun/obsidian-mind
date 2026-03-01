@@ -68,14 +68,14 @@ Skip steps that don't apply. The goal is transferring durable knowledge from con
 
 ### Thinking Workflow
 
-Use `thinking/` for drafts, reasoning, and analysis before writing final notes.
+Use `thinking/` for drafts, reasoning, and analysis before writing final notes. **Thinking notes are scratchpads, not storage.** They exist to help you reason — once the reasoning produces durable knowledge, promote it to proper notes and delete the scratchpad.
 
 1. Create a thinking note: `thinking/YYYY-MM-DD-descriptive-name.md`
 2. Use the Thinking Note template
 3. Reason through the problem, analyze options, draft content
-4. Write the final work note or decision record
-5. Link thinking note and final note to each other
-6. Thinking notes stay as reference -- no need to delete
+4. Promote findings to atomic notes in the correct folder (not one monolith — one note per distinct concept)
+5. Delete the thinking note — it served its purpose
+6. If the thinking process itself is worth preserving (unusual), keep it but link to the promoted notes
 
 ### Creating Notes
 
@@ -87,6 +87,8 @@ Use `thinking/` for drafts, reasoning, and analysis before writing final notes.
 ### Linking -- This Is Critical
 
 **Graph principle**: This vault is a graph, not a wiki. A note's value comes from its connections, not its length. Link FROM evidence TO concepts -- never curate evidence lists inside concept notes. Let backlinks do the work.
+
+**Atomicity rule**: Before writing any note, ask: "Does this cover multiple distinct concepts that could be separate nodes?" If a note would have 3+ independent sections that don't need each other to make sense, split into atomic notes that link to each other. A graph of small, connected nodes is more useful than a document with internal headings.
 
 Note types have graph roles:
 - **Evidence nodes** (work notes, decisions): add outbound links to concepts they demonstrate
