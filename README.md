@@ -1,6 +1,6 @@
 # 🧠 Obsidian Mind
 
-[![Claude Code](https://img.shields.io/badge/claude%20code-compatible-D97706)](https://docs.anthropic.com/en/docs/claude-code)
+[![Claude Code](https://img.shields.io/badge/claude%20code-required-D97706)](https://docs.anthropic.com/en/docs/claude-code)
 [![Obsidian](https://img.shields.io/badge/obsidian-1.12%2B-7C3AED)](https://obsidian.md)
 [![Python](https://img.shields.io/badge/python-3.8%2B-3776AB)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
