@@ -19,18 +19,20 @@ Defined in `.claude/commands/`. See [[Skills]] for full documentation.
 
 | Command | Purpose |
 |---------|---------|
-| `/peer-scan` | Deep scan a peer's GitHub PRs for review prep |
-| `/slack-scan` | Deep scan Slack channels/DMs for evidence |
-| `/capture-1on1` | Capture 1:1 meeting transcript into structured vault note |
-| `/vault-audit` | Audit indexes, links, orphans, stale context |
-| `/review-brief` | Generate review brief (manager or peer version) |
-| `/incident-capture` | Capture incident from Slack channels/DMs into structured vault notes |
-| `/project-archive` | Move completed project from active/ to archive/, update indexes |
-| `/wrap-up` | Full session review -- verify notes, indexes, links, suggest improvements |
-| `/dump` | Freeform capture -- dump anything, gets routed to the right notes |
 | `/standup` | Morning kickoff -- load context, review yesterday, surface tasks, priorities |
+| `/dump` | Freeform capture -- dump anything, gets routed to the right notes |
+| `/wrap-up` | Full session review -- verify notes, indexes, links, suggest improvements |
+| `/humanize` | Voice-calibrated editing -- make notes sound like you, not AI |
+| `/weekly` | Weekly synthesis -- cross-session patterns, North Star alignment, uncaptured wins |
+| `/capture-1on1` | Capture 1:1 meeting transcript into structured vault note |
+| `/incident-capture` | Capture incident from Slack channels/DMs into structured vault notes |
+| `/slack-scan` | Deep scan Slack channels/DMs for evidence |
+| `/peer-scan` | Deep scan a peer's GitHub PRs for review prep |
+| `/review-brief` | Generate review brief (manager or peer version) |
 | `/self-review` | Write self-assessment for review tool -- projects, competencies, principles |
 | `/review-peer` | Write peer review -- projects, principles, performance summary |
+| `/vault-audit` | Audit indexes, links, orphans, stale context |
+| `/project-archive` | Move completed project from active/ to archive/, update indexes |
 
 ## Vault Structure
 
@@ -55,8 +57,8 @@ Defined in `.claude/commands/`. See [[Skills]] for full documentation.
 | `reference/` | Codebase knowledge, architecture maps | Flow docs, architecture docs |
 | `thinking/` | Scratchpad for drafts and reasoning | Named `YYYY-MM-DD-topic.md` |
 | `templates/` | Obsidian templates | `Work Note.md`, `Decision Record.md`, etc. |
-| `.claude/commands/` | 10 slash commands | See command table above |
-| `.claude/agents/` | 7 subagents | See subagents table below |
+| `.claude/commands/` | 14 slash commands | See command table above |
+| `.claude/agents/` | 8 subagents | See subagents table below |
 | `.claude/scripts/` | Hook scripts | `session-start.sh`, `classify-message.py`, `validate-write.py`, `pre-compact.sh` |
 | `.claude/skills/` | Obsidian + QMD skills | Loaded automatically via Skill tool |
 
@@ -298,13 +300,14 @@ Specialized agents in `.claude/agents/` for heavy operations. They run in isolat
 
 | Agent | Purpose | Invoked by |
 |-------|---------|------------|
-| `brag-spotter` | Finds uncaptured wins and competency gaps | `/wrap-up` |
+| `brag-spotter` | Finds uncaptured wins and competency gaps | `/wrap-up`, `/weekly` |
 | `context-loader` | Loads all vault context about a person, project, or concept | Direct |
 | `cross-linker` | Finds missing wikilinks, orphans, broken backlinks | `/vault-audit` |
 | `people-profiler` | Bulk creates/updates person notes from Slack profiles | `/incident-capture` |
 | `review-prep` | Aggregates all performance evidence for a review period | `/review-brief` |
 | `slack-archaeologist` | Full Slack reconstruction -- every message, thread, profile | `/incident-capture` |
 | `vault-librarian` | Deep vault maintenance -- orphans, broken links, stale notes | `/vault-audit` |
+| `review-fact-checker` | Verifies every claim in a review draft against vault sources | `/self-review`, `/review-peer` |
 
 ## Hooks
 

@@ -109,7 +109,7 @@ Five lifecycle hooks handle routing automatically:
 
 **End of day**: Say "wrap up" and Claude invokes `/wrap-up` — verifies notes, updates indexes, checks links, spots uncaptured wins.
 
-**Weekly**: Run `/vault-audit` to catch orphan notes, broken links, and stale content.
+**Weekly**: Run `/weekly` for cross-session synthesis — North Star alignment, patterns, uncaptured wins, and next-week priorities. Run `/vault-audit` to catch orphan notes, broken links, and stale content.
 
 **Review season**: Run `/review-brief manager` and get a structured review prep document with all the evidence already linked.
 
@@ -124,15 +124,17 @@ Defined in `.claude/commands/`. Run them in any Claude Code session.
 | `/standup` | Morning kickoff — loads context, reviews yesterday, surfaces tasks, suggests priorities |
 | `/dump` | Freeform capture — talk naturally about anything, Claude routes it all to the right notes |
 | `/wrap-up` | Full session review — verify notes, indexes, links, suggest improvements |
+| `/humanize` | Voice-calibrated editing — makes Claude-drafted text sound like you wrote it |
+| `/weekly` | Weekly synthesis — cross-session patterns, North Star alignment, uncaptured wins |
 | `/capture-1on1` | Capture a 1:1 meeting transcript into a structured vault note |
 | `/incident-capture` | Capture an incident from Slack/channels into structured notes |
 | `/slack-scan` | Deep scan Slack channels/DMs for evidence |
 | `/peer-scan` | Deep scan a peer's GitHub PRs for review prep |
 | `/review-brief` | Generate a review brief (manager or peer version) |
-| `/vault-audit` | Audit indexes, links, orphans, stale context |
-| `/project-archive` | Move a completed project from active/ to archive/, update indexes |
 | `/self-review` | Write your self-assessment for review season — projects, competencies, principles |
 | `/review-peer` | Write a peer review — projects, principles, performance summary |
+| `/vault-audit` | Audit indexes, links, orphans, stale context |
+| `/project-archive` | Move a completed project from active/ to archive/, update indexes |
 
 ---
 
@@ -142,7 +144,7 @@ Specialized agents that run in isolated context windows. They handle heavy opera
 
 | Agent | Purpose | Invoked by |
 |-------|---------|------------|
-| `brag-spotter` | Finds uncaptured wins and competency gaps | `/wrap-up` |
+| `brag-spotter` | Finds uncaptured wins and competency gaps | `/wrap-up`, `/weekly` |
 | `context-loader` | Loads all vault context about a person, project, or concept | Direct |
 | `cross-linker` | Finds missing wikilinks, orphans, broken backlinks | `/vault-audit` |
 | `people-profiler` | Bulk creates/updates person notes from Slack profiles | `/incident-capture` |
@@ -253,7 +255,7 @@ thinking/               Scratchpad for drafts — promote findings, then delete
 templates/              Obsidian templates with YAML frontmatter
 
 .claude/
-  commands/             12 slash commands
+  commands/             14 slash commands
   agents/               8 subagents
   scripts/              Hook scripts + charcount.sh utility
   skills/               Obsidian + QMD skills

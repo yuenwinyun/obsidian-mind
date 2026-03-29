@@ -19,6 +19,13 @@ Custom slash commands, subagents, and reusable workflows. Defined in `.claude/co
 | `/dump` | Freeform capture — dump anything, gets routed to the right notes automatically |
 | `/wrap-up` | Full session review — verify notes, indexes, links, suggest improvements. Auto-triggered on "wrap up". |
 
+### Editing & Synthesis
+
+| Command | Purpose |
+|---------|---------|
+| `/humanize` | Voice-calibrated editing — makes Claude-drafted text sound like you wrote it |
+| `/weekly` | Weekly synthesis — cross-session patterns, North Star alignment, uncaptured wins |
+
 ### Capture & Documentation
 
 | Command | Purpose |
@@ -43,11 +50,35 @@ Custom slash commands, subagents, and reusable workflows. Defined in `.claude/co
 | `/vault-audit` | Deep structural audit — indexes, frontmatter, links, Bases, folder placement, stale context |
 | `/project-archive` | Move completed project from `work/active/` to `work/archive/YYYY/`, update all indexes |
 
+## Usage Notes
+
+**Daily:**
+- `/standup` replaces the manual session start — reads North Star, active work, tasks, git log
+- `/dump` processes freeform text and routes each piece to the correct note type and folder
+- `/wrap-up` is auto-triggered when you say "wrap up" — runs full session review
+
+**Editing & Synthesis:**
+- `/humanize` calibrates against your actual writing samples, not a word blacklist. Detects context from frontmatter (review → corporate-confident, incident → precise, 1:1 → conversational). Run after drafting any note to make it sound human.
+- `/weekly` bridges standup and review brief — run at end of week for cross-session patterns, North Star drift, and uncaptured wins. Output is transient by default; offer to promote findings to brag doc or North Star.
+
+**Capture:**
+- `/capture-1on1` handles transcripts, raw notes, or summaries
+- `/incident-capture` takes Slack URLs and produces structured incident documentation
+- `/slack-scan` should be run AFTER `/peer-scan` to add context beyond code (leadership, communication, collaboration evidence)
+
+**Performance:**
+- `/peer-scan` works best when launched as parallel agents (one per person)
+- `/review-brief` needs the private brief to exist first — it generates filtered versions from it
+
+**Maintenance:**
+- `/vault-audit` should be run at the end of substantial sessions — catches stale indexes and mixed context
+- `/project-archive` handles the active/ → archive/ move with index updates
+
 ## Subagents
 
 | Agent | Purpose | Invoked by |
 |-------|---------|------------|
-| `brag-spotter` | Proactively finds uncaptured wins and competency gaps | `/wrap-up` |
+| `brag-spotter` | Proactively finds uncaptured wins and competency gaps | `/wrap-up`, `/weekly` |
 | `context-loader` | Loads all vault context about a person, project, incident, or concept | Direct — "load context on X" |
 | `cross-linker` | Finds missing wikilinks, orphans, broken backlinks across the vault | `/vault-audit` |
 | `people-profiler` | Bulk create/update person notes from Slack profiles | `/incident-capture` |
@@ -78,6 +109,13 @@ If QMD is installed (`npm install -g @tobilu/qmd`), the vault has semantic searc
 - `qmd update && qmd embed` — refresh index after bulk changes
 
 SessionStart hook runs `qmd update` automatically. See `.claude/skills/qmd/SKILL.md` for full reference.
+
+## Workflow: Weekly Review
+
+1. **`/weekly`** — synthesize the week's activity, check alignment, find patterns
+2. Promote any uncaptured wins to brag doc
+3. Update North Star if focus shifted
+4. **`/wrap-up`** — close the session cleanly
 
 ## Workflow: Full Review Cycle Prep
 

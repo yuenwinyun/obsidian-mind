@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.2 — 2026-03-29
+
+### Added
+- `/humanize` command — voice-calibrated editing that matches your writing style, not a generic AI word blacklist
+- `/weekly` command — cross-session weekly synthesis with North Star alignment, pattern detection, and uncaptured win spotting
+
+### Fixed
+- `validate-write.py`: normalized path separators for Windows (backslashes weren't matching forward-slash skip list)
+- `validate-write.py`: added `thinking/` to skip list (scratchpad notes shouldn't trigger validation warnings)
+
+### Changed
+- CLAUDE.md: reordered command table by category, added new commands, fixed stale counts (10→14 commands, 7→8 agents), added `review-fact-checker` subagent
+- README: updated command table, daily workflow section, command and agent counts
+- `brain/Skills.md`: added Editing & Synthesis category, new commands, usage notes, and Weekly Review workflow
+
 ## v3.1 — 2026-03-27
 
 ### Added

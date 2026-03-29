@@ -18,7 +18,9 @@ def main():
     # Only validate markdown files in the vault, skip dotfiles and templates
     if not file_path.endswith(".md"):
         sys.exit(0)
-    if any(skip in file_path for skip in [".claude/", ".obsidian/", "templates/"]):
+    # Normalize path separators for cross-platform matching (Windows uses backslashes)
+    normalized = file_path.replace("\\", "/")
+    if any(skip in normalized for skip in [".claude/", ".obsidian/", "templates/", "thinking/"]):
         sys.exit(0)
 
     warnings = []
