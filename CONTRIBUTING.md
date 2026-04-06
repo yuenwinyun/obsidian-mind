@@ -7,6 +7,7 @@ When adding or modifying commands, agents, hooks, or vault structure, **all of t
 | File | What to update |
 |------|---------------|
 | `AGENTS.md` | Codex workflow rules, prompt routing, vault conventions |
+| `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, `TOOLS.md` | OpenClaw workspace surface and startup assumptions |
 | `CLAUDE.md` | Command table, agent table, vault structure table, counts (commands/agents), root files rule |
 | `README.md` | Command table, agent table, vault structure diagram, counts, relevant sections |
 | `brain/Skills.md` | Command tables (by category), subagents table, usage notes, workflows if affected |
@@ -20,6 +21,7 @@ When adding or modifying commands, agents, hooks, or vault structure, **all of t
 - Counts match everywhere (commands, agents)
 - New command/agent appears in ALL tables (CLAUDE.md + README + Skills.md)
 - New Codex prompt appears in `AGENTS.md`, `README.md`, and `brain/Skills.md`
+- OpenClaw root workspace files stay aligned with `AGENTS.md` and `README.md`
 - `vault-manifest.json` version is bumped
 - CHANGELOG has the new version entry
 - `python3 scripts/test_codex_e2e.py -v` passes

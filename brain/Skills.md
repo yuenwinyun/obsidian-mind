@@ -7,7 +7,7 @@ tags:
 
 # Skills
 
-Custom slash commands, Codex prompts, subagents, and reusable workflows. Defined in `.claude/commands/`, `.codex/prompts/`, and `.claude/agents/`.
+Custom slash commands, Codex prompts, OpenClaw workspace files, subagents, and reusable workflows. Defined in `.claude/commands/`, `.codex/prompts/`, root OpenClaw files, and `.claude/agents/`.
 
 ## Codex Prompt Library
 
@@ -16,6 +16,16 @@ Custom slash commands, Codex prompts, subagents, and reusable workflows. Defined
 | `standup.md` | Morning kickoff for Codex sessions |
 | `dump.md` | Freeform capture and routing for Codex sessions |
 | `wrap-up.md` | End-of-session review for Codex sessions |
+
+## OpenClaw Workspace Files
+
+| File | Purpose |
+|------|---------|
+| `SOUL.md` | Reasoning orientation for OpenClaw |
+| `USER.md` | Stable user context stub |
+| `MEMORY.md` | Lightweight long-term memory index that points into the vault |
+| `HEARTBEAT.md` | Periodic maintenance checklist |
+| `TOOLS.md` | Command and tool preferences for vault work |
 
 ## Slash Commands
 

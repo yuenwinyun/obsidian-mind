@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.7 — 2026-04-06
+
+### Added
+- `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md` — OpenClaw-ready root workspace files for startup, memory, maintenance, and tool preferences
+
+### Changed
+- README: documented OpenClaw support alongside Codex and Claude Code
+- `AGENTS.md`, `CLAUDE.md`, `brain/Skills.md`, and `CONTRIBUTING.md`: updated to describe the OpenClaw support surface
+- `vault-manifest.json`: bumped template version to `3.7.0` and added a `v3.7` fingerprint for the OpenClaw workspace files
+- Codex/OpenClaw E2E validation now checks the OpenClaw workspace surface too
+
 ## v3.6 — 2026-04-06
 
 ### Added

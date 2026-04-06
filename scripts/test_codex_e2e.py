@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""End-to-end validation for the Codex-facing vault surface."""
+"""End-to-end validation for the Codex and OpenClaw-facing vault surface."""
 
 from __future__ import annotations
 
@@ -53,8 +53,8 @@ class TestCodexSurface(unittest.TestCase):
 
     def test_docs_expose_codex_support(self) -> None:
         expectations = {
-            "README.md": ["Codex", "AGENTS.md", ".codex/prompts/"],
-            "CLAUDE.md": ["Codex Compatibility", "AGENTS.md", ".codex/prompts/"],
+            "README.md": ["Codex", "OpenClaw", "AGENTS.md", ".codex/prompts/"],
+            "CLAUDE.md": ["Codex Compatibility", "OpenClaw Compatibility", "AGENTS.md", ".codex/prompts/"],
             "brain/Skills.md": ["Codex Prompt Library", "standup.md", "wrap-up.md"],
             "CONTRIBUTING.md": ["AGENTS.md", ".codex/prompts/", "test_codex_e2e.py"],
         }
@@ -69,11 +69,34 @@ class TestCodexSurface(unittest.TestCase):
         self.assertIn("AGENTS.md", manifest["infrastructure"])
         self.assertIn(".codex/**", manifest["infrastructure"])
         self.assertIn("scripts/**", manifest["infrastructure"])
-        self.assertIn("v3.6", manifest["version_fingerprints"])
+        self.assertIn("v3.7", manifest["version_fingerprints"])
 
-        for relative_path in manifest["version_fingerprints"]["v3.6"]["exists"]:
+        for relative_path in manifest["version_fingerprints"]["v3.7"]["exists"]:
             with self.subTest(path=relative_path):
                 self.assertTrue((ROOT / relative_path).exists(), relative_path)
+
+    def test_openclaw_workspace_files_exist(self) -> None:
+        for relative_path in [
+            "SOUL.md",
+            "USER.md",
+            "MEMORY.md",
+            "HEARTBEAT.md",
+            "TOOLS.md",
+        ]:
+            with self.subTest(path=relative_path):
+                self.assertTrue((ROOT / relative_path).exists(), relative_path)
+
+    def test_openclaw_docs_reference_workspace_files(self) -> None:
+        expectations = {
+            "AGENTS.md": ["OpenClaw", "SOUL.md", "USER.md", "MEMORY.md", "HEARTBEAT.md", "TOOLS.md"],
+            "README.md": ["OpenClaw", "SOUL.md", "USER.md", "MEMORY.md", "HEARTBEAT.md", "TOOLS.md"],
+            "brain/Skills.md": ["OpenClaw Workspace Files", "SOUL.md", "HEARTBEAT.md"],
+        }
+        for relative_path, snippets in expectations.items():
+            content = read_text(relative_path)
+            for snippet in snippets:
+                with self.subTest(path=relative_path, snippet=snippet):
+                    self.assertIn(snippet, content)
 
     def test_metadata_validator_passes(self) -> None:
         proc = subprocess.run(

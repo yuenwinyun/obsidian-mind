@@ -3,6 +3,7 @@
 # 🧠 Obsidian Mind
 
 [![Codex](https://img.shields.io/badge/codex-supported-10A37F)](https://github.com/openai/codex)
+[![OpenClaw](https://img.shields.io/badge/openclaw-supported-1F6FEB)](AGENTS.md)
 [![Claude Code](https://img.shields.io/badge/claude%20code-compatible-D97706)](https://docs.anthropic.com/en/docs/claude-code)
 [![Obsidian](https://img.shields.io/badge/obsidian-1.12%2B-7C3AED)](https://obsidian.md)
 [![Python](https://img.shields.io/badge/python-3.8%2B-3776AB)](https://python.org)
@@ -123,13 +124,14 @@ qmd update && qmd embed
 
 **Folders group by purpose. Links group by meaning.** A note lives in one folder (its home) but links to many notes (its context). Your agent maintains this graph — linking work notes to people, decisions, and competencies automatically. When review season arrives, the backlinks on each competency note are already the evidence trail. A note without links is a bug.
 
-**Vault-first memory** keeps context across sessions and machines. All durable knowledge lives in `brain/` topic notes (git-tracked, Obsidian-browsable, linked). Codex reads `AGENTS.md` as the repo operating manual. Claude Code uses `CLAUDE.md` plus hooks. In both cases, the vault is the source of truth.
+**Vault-first memory** keeps context across sessions and machines. All durable knowledge lives in `brain/` topic notes (git-tracked, Obsidian-browsable, linked). Codex reads `AGENTS.md` as the repo operating manual. OpenClaw uses `AGENTS.md` plus root workspace files like `SOUL.md`, `USER.md`, and `MEMORY.md`. Claude Code uses `CLAUDE.md` plus hooks. In all cases, the vault is the source of truth.
 
-**Sessions have a designed lifecycle.** Codex uses `AGENTS.md` plus reusable prompts in `.codex/prompts/` for the core daily workflows. Claude Code still has the richer automatic runtime with hooks and slash commands in `.claude/`. The vault conventions are shared between both.
+**Sessions have a designed lifecycle.** Codex uses `AGENTS.md` plus reusable prompts in `.codex/prompts/` for the core daily workflows. OpenClaw uses the same vault conventions plus root workspace files for startup, memory, heartbeat, and tools. Claude Code still has the richer automatic runtime with hooks and slash commands in `.claude/`.
 
 ### Agent Runtimes
 
 - **Codex** — repo-native `AGENTS.md` plus `.codex/prompts/standup.md`, `dump.md`, and `wrap-up.md`
+- **OpenClaw** — `AGENTS.md` plus `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md`
 - **Claude Code** — `CLAUDE.md`, `.claude/commands/`, and automatic hooks
 
 ### Claude Hooks
@@ -348,12 +350,13 @@ This is a starting point. Adapt it to how you work:
 | Your competencies | `perf/competencies/` — match your org's framework |
 | Codex behavior | `AGENTS.md` — Codex operating manual |
 | Codex workflows | `.codex/prompts/` — reusable standup, dump, and wrap-up prompts |
+| OpenClaw behavior | `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, `TOOLS.md` — workspace files for startup, memory, and maintenance |
 | Your tools | `.claude/commands/` — edit for your GitHub org, Slack workspace |
 | Your conventions | `CLAUDE.md` — the operating manual, evolve it as you go |
 | Your domain | Add folders, subagents in `.claude/agents/`, or classification rules in `.claude/scripts/` |
 
 > [!IMPORTANT]
-> `AGENTS.md` is the Codex operating manual. `CLAUDE.md` remains the Claude-specific manual. Keep both aligned with the vault conventions.
+> `AGENTS.md` is the repo-level operating manual for Codex and OpenClaw. `CLAUDE.md` remains the Claude-specific manual. Keep all agent surfaces aligned with the vault conventions.
 
 ---
 

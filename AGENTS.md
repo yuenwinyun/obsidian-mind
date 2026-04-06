@@ -2,6 +2,8 @@
 
 This repository is an Obsidian vault template. For Codex, this file is the primary operating manual.
 
+It also works as the repo-level instruction file for OpenClaw. OpenClaw-specific root files are provided in `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md`.
+
 The durable system is the vault itself:
 - goals live in `brain/North Star.md`
 - memory lives in `brain/`
@@ -21,6 +23,14 @@ Before substantial work:
 4. Scan `brain/Memories.md`, then open the relevant topic notes
 5. Check recent changes with `git log --oneline --since="48 hours ago" --no-merges`
 6. If Obsidian CLI is available, prefer it for note reads, backlinks, tasks, and property updates
+
+For OpenClaw sessions, the expected root-file startup sequence is:
+
+1. Read `SOUL.md`
+2. Read `USER.md`
+3. Read `MEMORY.md` when in the main user session
+4. Use `HEARTBEAT.md` for periodic lightweight maintenance
+5. Use `TOOLS.md` for command preferences
 
 If the user asks for a morning kickoff or says "start session", follow `.codex/prompts/standup.md`.
 
@@ -107,3 +117,4 @@ Fall back to direct file reads only when the CLI is unavailable.
 - `CLAUDE.md` remains the detailed manual for Claude Code
 - `.claude/commands/`, `.claude/agents/`, and `.claude/scripts/` remain supported for Claude users
 - Codex should treat those files as source material, not as automatically active runtime features
+- OpenClaw should use the root workspace files plus this `AGENTS.md` as its operating surface
