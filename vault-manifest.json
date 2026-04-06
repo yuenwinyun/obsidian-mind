@@ -1,8 +1,9 @@
 {
   "template": "obsidian-mind",
-  "version": "3.3.0",
-  "released": "2026-03-29",
+  "version": "3.6.0",
+  "released": "2026-04-06",
   "infrastructure": [
+    "AGENTS.md",
     "CLAUDE.md",
     "Home.md",
     "README.md",
@@ -10,8 +11,10 @@
     "CONTRIBUTING.md",
     "LICENSE",
     ".gitignore",
+    ".codex/**",
     ".claude/**",
     ".claude-plugin/**",
+    "scripts/**",
     "templates/**",
     "bases/**",
     "vault-manifest.json",
@@ -66,6 +69,9 @@
     },
     "v3.3": {
       "exists": ["vault-manifest.json"]
+    },
+    "v3.6": {
+      "exists": ["AGENTS.md", ".codex/prompts/standup.md", "scripts/validate_template_metadata.py"]
     }
   },
   "frontmatter_required": {

@@ -15,7 +15,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run tests
-        run: python3 .claude/scripts/test_hooks.py
+        run: |
+          python3 .claude/scripts/test_hooks.py
+          python3 scripts/test_codex_e2e.py
+
+      - name: Validate template metadata
+        run: python3 scripts/validate_template_metadata.py
 
       - name: Build vault zip
         run: |

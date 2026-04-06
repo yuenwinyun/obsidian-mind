@@ -7,7 +7,15 @@ tags:
 
 # Skills
 
-Custom slash commands, subagents, and reusable workflows. Defined in `.claude/commands/` and `.claude/agents/`.
+Custom slash commands, Codex prompts, subagents, and reusable workflows. Defined in `.claude/commands/`, `.codex/prompts/`, and `.claude/agents/`.
+
+## Codex Prompt Library
+
+| Prompt | Purpose |
+|--------|---------|
+| `standup.md` | Morning kickoff for Codex sessions |
+| `dump.md` | Freeform capture and routing for Codex sessions |
+| `wrap-up.md` | End-of-session review for Codex sessions |
 
 ## Slash Commands
 

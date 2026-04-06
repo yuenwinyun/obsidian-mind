@@ -11,6 +11,10 @@
 # Claude Code (local settings are personal)
 .claude/settings.local.json
 
+# Python test artifacts
+__pycache__/
+*.pyc
+
 # QMD index (local, regenerated)
 .qmd/
 
