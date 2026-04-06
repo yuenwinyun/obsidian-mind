@@ -2,6 +2,14 @@
 
 Personal Obsidian vault -- an external brain for work notes, decisions, performance tracking, and Claude context.
 
+## Codex Compatibility
+
+Codex users should start with `AGENTS.md` and the prompt library in `.codex/prompts/`. This file remains the detailed operating manual for Claude Code and the `.claude/` runtime.
+
+## OpenClaw Compatibility
+
+OpenClaw users should start with `AGENTS.md` plus the root workspace files: `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md`.
+
 ## Skills & Capabilities
 
 This vault has [obsidian-skills](https://github.com/kepano/obsidian-skills) installed in `.claude/skills/`. Follow these skill conventions:
@@ -41,7 +49,13 @@ Defined in `.claude/commands/`. See [[Skills]] for full documentation.
 |--------|---------|-----------|
 | `Home.md` | **Vault entry point** -- embedded Base views, quick links | Open this first |
 | `vault-manifest.json` | **Template metadata** -- version, infrastructure vs user content boundaries, frontmatter schemas, version fingerprints | Used by `/vault-upgrade` for migration |
-| `CHANGELOG.md` | **Version history** -- tracks template releases (v1--v3.3) with what changed | Reference for upgrade paths |
+| `AGENTS.md` | **Codex operating manual** -- repo-native workflow instructions for Codex | Start here if using Codex |
+| `SOUL.md` | **OpenClaw reasoning orientation** | Start here if using OpenClaw |
+| `USER.md` | **OpenClaw user context stub** | Fill in your stable human context |
+| `MEMORY.md` | **OpenClaw memory index** | Points into the vault |
+| `HEARTBEAT.md` | **OpenClaw periodic maintenance checklist** | Used for heartbeat-style checks |
+| `TOOLS.md` | **OpenClaw tool preferences** | Obsidian CLI, QMD, git, and search notes |
+| `CHANGELOG.md` | **Version history** -- tracks template releases (v1--v3.8) with what changed | Reference for upgrade paths |
 | `bases/` | **All Bases centralized** -- dynamic views for navigation | `Work Dashboard`, `Incidents`, `People Directory`, `1-1 History`, `Review Evidence`, `Competency Map`, `Templates` |
 | `work/` | Work notes index | `Index.md` (detailed MOC) |
 | `work/active/` | **Current projects only** (1-3 files) | Move here when starting, move to archive when done |
@@ -60,6 +74,7 @@ Defined in `.claude/commands/`. See [[Skills]] for full documentation.
 | `reference/` | Codebase knowledge, architecture maps | Flow docs, architecture docs |
 | `thinking/` | Scratchpad for drafts and reasoning | Named `YYYY-MM-DD-topic.md` |
 | `templates/` | Obsidian templates | `Work Note.md`, `Decision Record.md`, etc. |
+| `.codex/prompts/` | Codex workflow prompts | `standup.md`, `dump.md`, `wrap-up.md` |
 | `.claude/commands/` | 15 slash commands | See command table above |
 | `.claude/agents/` | 9 subagents | See subagents table below |
 | `.claude/scripts/` | Hook scripts | `session-start.sh`, `classify-message.py`, `validate-write.py`, `pre-compact.sh` |

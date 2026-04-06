@@ -5,9 +5,37 @@ on:
     branches: [main]
     paths:
       - '.claude/scripts/**'
+      - '.codex/**'
+      - 'AGENTS.md'
+      - 'SOUL.md'
+      - 'USER.md'
+      - 'MEMORY.md'
+      - 'HEARTBEAT.md'
+      - 'TOOLS.md'
+      - 'CLAUDE.md'
+      - 'brain/Skills.md'
+      - 'CHANGELOG.md'
+      - 'CONTRIBUTING.md'
+      - 'README.md'
+      - 'scripts/**'
+      - 'vault-manifest.json'
   pull_request:
     paths:
       - '.claude/scripts/**'
+      - '.codex/**'
+      - 'AGENTS.md'
+      - 'SOUL.md'
+      - 'USER.md'
+      - 'MEMORY.md'
+      - 'HEARTBEAT.md'
+      - 'TOOLS.md'
+      - 'CLAUDE.md'
+      - 'brain/Skills.md'
+      - 'CHANGELOG.md'
+      - 'CONTRIBUTING.md'
+      - 'README.md'
+      - 'scripts/**'
+      - 'vault-manifest.json'
 
 jobs:
   test:
@@ -19,3 +47,9 @@ jobs:
           python-version: '3.12'
       - name: Run hook tests
         run: python .claude/scripts/test_hooks.py -v
+      - name: Run Codex E2E tests
+        run: python scripts/test_codex_e2e.py -v
+      - name: Test release artifact
+        run: python scripts/test_release_artifact.py -v
+      - name: Validate template metadata
+        run: python scripts/validate_template_metadata.py

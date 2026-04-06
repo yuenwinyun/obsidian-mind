@@ -2,29 +2,31 @@
 
 # 🧠 Obsidian Mind
 
-[![Claude Code](https://img.shields.io/badge/claude%20code-required-D97706)](https://docs.anthropic.com/en/docs/claude-code)
+[![Codex](https://img.shields.io/badge/codex-supported-10A37F)](https://github.com/openai/codex)
+[![OpenClaw](https://img.shields.io/badge/openclaw-supported-1F6FEB)](AGENTS.md)
+[![Claude Code](https://img.shields.io/badge/claude%20code-compatible-D97706)](https://docs.anthropic.com/en/docs/claude-code)
 [![Obsidian](https://img.shields.io/badge/obsidian-1.12%2B-7C3AED)](https://obsidian.md)
 [![Python](https://img.shields.io/badge/python-3.8%2B-3776AB)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **An Obsidian vault that makes Claude Code remember everything.** Start a session, talk about your day, and Claude handles the rest — notes, links, indexes, performance tracking. Every conversation builds on the last.
+> **An Obsidian vault that gives Codex a real memory system.** Start a session, talk about your day, and your coding agent can maintain notes, links, indexes, and performance evidence that compound over time.
 
 ---
 
 ## 🔴 The Problem
 
-Claude Code is powerful, but it forgets. Every session starts from zero — no context on your goals, your team, your patterns, your wins. You re-explain the same things. You lose decisions made three conversations ago. The knowledge never compounds.
+Codex and Claude Code are powerful, but the default session model is still ephemeral. Every session starts too cold — no context on your goals, your team, your patterns, your wins. You re-explain the same things. You lose decisions made three conversations ago. The knowledge never compounds.
 
 ## 🟢 The Solution
 
-Give Claude a brain.
+Give your agent a brain.
 
 ```
 You: "start session"
-Claude: *reads North Star, checks active projects, scans recent memories*
-Claude: "You're working on Project Alpha, blocked on the BE contract.
-         Last session you decided to split the coordinator. Your 1:1
-         with your manager is tomorrow — review brief is ready."
+Codex: *reads North Star, checks active projects, scans recent memories*
+Codex: "You're working on Project Alpha, blocked on the BE contract.
+        Last session you decided to split the coordinator. Your 1:1
+        with your manager is tomorrow — review brief is ready."
 ```
 
 ---
@@ -34,6 +36,39 @@ Claude: "You're working on Project Alpha, blocked on the BE contract.
 <p align="center">
   <img src="obsidian-mind-demo.gif" alt="Obsidian Mind demo — standup and dump commands" width="800">
 </p>
+
+### Runtime Support Matrix
+
+| Runtime | Support Level | Primary Entry Surface |
+|---------|---------------|-----------------------|
+| Claude Code | Full | `CLAUDE.md` + `.claude/commands/` + hooks |
+| Codex | First-pass | `AGENTS.md` + `.codex/prompts/` |
+| OpenClaw | First-pass | `AGENTS.md` + `SOUL.md`/`USER.md`/`MEMORY.md`/`HEARTBEAT.md`/`TOOLS.md` |
+
+> [!IMPORTANT]
+> Multi-agent support is not full parity yet. Claude Code has the richest automation today. Codex and OpenClaw are supported first for startup, memory, and core daily workflows.
+
+### Codex / OpenClaw Flow
+
+**Morning kickoff:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/standup.md
+```
+
+**Brain dump after a meeting:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/dump.md with the raw meeting notes
+```
+
+**End of day:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/wrap-up.md
+```
+
+### Claude Code Flow
 
 **Morning kickoff:**
 
@@ -87,7 +122,8 @@ You: "wrap up"
 1. Clone this repo (or use it as a **GitHub template**)
 2. Open the folder as an **Obsidian vault**
 3. Enable the **Obsidian CLI** in Settings → General (requires Obsidian 1.12+)
-4. Run **`claude`** in the vault directory
+4. Run **`codex`** in the vault directory
+   - Optional: run **`claude`** if you want the Claude-specific hooks and slash commands
 5. Fill in **`brain/North Star.md`** with your goals — this grounds every session
 6. Start talking about work
 
@@ -103,15 +139,15 @@ qmd update && qmd embed
 ```
 
 > [!NOTE]
-> If QMD isn't installed, everything still works — Claude falls back to the Obsidian CLI and grep.
+> If QMD isn't installed, everything still works — the agent falls back to the Obsidian CLI and grep.
 
 ---
 
 ## 📋 Requirements
 
 - [Obsidian](https://obsidian.md) 1.12+ (for CLI support)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-- Python 3 (for hook scripts)
+- [Codex CLI](https://github.com/openai/codex) or [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+- Python 3 (for Claude hook scripts and template validation)
 - Git (for version history)
 - [QMD](https://github.com/tobi/qmd) (optional, for semantic search)
 
@@ -119,13 +155,24 @@ qmd update && qmd embed
 
 ## ⚙️ How It Works
 
-**Folders group by purpose. Links group by meaning.** A note lives in one folder (its home) but links to many notes (its context). Claude maintains this graph — linking work notes to people, decisions, and competencies automatically. When review season arrives, the backlinks on each competency note are already the evidence trail. A note without links is a bug.
+**Folders group by purpose. Links group by meaning.** A note lives in one folder (its home) but links to many notes (its context). Your agent maintains this graph — linking work notes to people, decisions, and competencies automatically. When review season arrives, the backlinks on each competency note are already the evidence trail. A note without links is a bug.
 
-**Vault-first memory** keeps context across sessions and machines. All durable knowledge lives in `brain/` topic notes (git-tracked, Obsidian-browsable, linked). Claude Code's `MEMORY.md` (`~/.claude/`) is an auto-loaded index that points to vault locations — never the storage itself. This means memories survive machine changes and are part of the graph.
+**Vault-first memory** keeps context across sessions and machines. All durable knowledge lives in `brain/` topic notes (git-tracked, Obsidian-browsable, linked). Codex reads `AGENTS.md` as the repo operating manual. OpenClaw uses `AGENTS.md` plus root workspace files like `SOUL.md`, `USER.md`, and `MEMORY.md`. Claude Code uses `CLAUDE.md` plus hooks. In all cases, the vault is the source of truth.
 
-**Sessions have a designed lifecycle.** The `SessionStart` hook auto-injects your North Star goals, active projects, recent changes, open tasks, and the full vault file listing — Claude starts every session with context, not a blank slate. At the end, say "wrap up" and Claude runs `/wrap-up` — verifying notes, updating indexes, and spotting uncaptured wins. The 285-line `CLAUDE.md` governs everything in between: where to file things, how to link, when to split a note, what to do with decisions and incidents.
+**Sessions have a designed lifecycle.** Codex uses `AGENTS.md` plus reusable prompts in `.codex/prompts/` for the core daily workflows. OpenClaw uses the same vault conventions plus root workspace files for startup, memory, heartbeat, and tools. Claude Code still has the richer automatic runtime with hooks and slash commands in `.claude/`.
 
-### Hooks
+### Agent Runtimes
+
+- **Codex** — repo-native `AGENTS.md` plus `.codex/prompts/standup.md`, `dump.md`, and `wrap-up.md`
+- **OpenClaw** — `AGENTS.md` plus `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md`
+- **Claude Code** — `CLAUDE.md`, `.claude/commands/`, and automatic hooks
+
+Runtime summary:
+- Claude Code has full lifecycle automation today.
+- Codex supports the core daily workflows through prompt files.
+- OpenClaw supports startup, memory, heartbeat, and tool routing through root workspace files.
+
+### Claude Hooks
 
 Five lifecycle hooks handle routing automatically:
 
@@ -138,17 +185,17 @@ Five lifecycle hooks handle routing automatically:
 | 🏁 Stop | End of session | Checklist: archive completed projects, update indexes, check orphans |
 
 > [!TIP]
-> You just talk. The hooks handle the routing.
+> With Claude Code, the hooks handle routing automatically. With Codex, the equivalent workflows are explicit prompt files under `.codex/prompts/`.
 
 ---
 
 ## 📅 Daily Workflow
 
-**Morning**: Run `/standup`. Claude loads your North Star, active projects, open tasks, and recent changes. You get a structured summary and suggested priorities.
+**Morning**: In Codex, point it at `.codex/prompts/standup.md`. In Claude Code, run `/standup`. Both paths load North Star, active projects, open tasks, and recent changes.
 
-**Throughout the day**: Talk naturally. Mention a decision you made, an incident that happened, a 1:1 you just had, a win you want to remember. The classification hook nudges Claude to file each piece correctly. For bigger brain dumps, use `/dump` and narrate everything at once.
+**Throughout the day**: Talk naturally. Mention a decision you made, an incident that happened, a 1:1 you just had, a win you want to remember. In Codex, use `.codex/prompts/dump.md` for larger captures. In Claude Code, the classification hook and `/dump` handle this automatically.
 
-**End of day**: Say "wrap up" and Claude invokes `/wrap-up` — verifies notes, updates indexes, checks links, spots uncaptured wins.
+**End of day**: Ask Codex to follow `.codex/prompts/wrap-up.md`, or say "wrap up" in Claude Code and let `/wrap-up` run.
 
 **Weekly**: Run `/weekly` for cross-session synthesis — North Star alignment, patterns, uncaptured wins, and next-week priorities. Run `/vault-audit` to catch orphan notes, broken links, and stale content.
 
@@ -156,7 +203,17 @@ Five lifecycle hooks handle routing automatically:
 
 ---
 
-## 🛠️ Commands
+## 🛠️ Codex Prompt Library
+
+Defined in `.codex/prompts/`. Use them in any Codex session.
+
+| Prompt | What It Does |
+|--------|---------------|
+| `standup.md` | Morning kickoff — loads context, reviews yesterday, surfaces tasks, suggests priorities |
+| `dump.md` | Freeform capture — routes an unstructured update into the right notes |
+| `wrap-up.md` | End-of-session review — checks note quality, indexes, links, and next-step cleanup |
+
+## 🛠️ Claude Commands
 
 Defined in `.claude/commands/`. Run them in any Claude Code session.
 
@@ -329,12 +386,15 @@ This is a starting point. Adapt it to how you work:
 | Your goals | `brain/North Star.md` — grounds every session |
 | Your org | `org/` — add your manager, team, key collaborators |
 | Your competencies | `perf/competencies/` — match your org's framework |
+| Codex behavior | `AGENTS.md` — Codex operating manual |
+| Codex workflows | `.codex/prompts/` — reusable standup, dump, and wrap-up prompts |
+| OpenClaw behavior | `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, `TOOLS.md` — workspace files for startup, memory, and maintenance |
 | Your tools | `.claude/commands/` — edit for your GitHub org, Slack workspace |
 | Your conventions | `CLAUDE.md` — the operating manual, evolve it as you go |
 | Your domain | Add folders, subagents in `.claude/agents/`, or classification rules in `.claude/scripts/` |
 
 > [!IMPORTANT]
-> `CLAUDE.md` is the operating manual. When you change conventions, update it — Claude reads it every session.
+> `AGENTS.md` is the repo-level operating manual for Codex and OpenClaw. `CLAUDE.md` remains the Claude-specific manual. Keep all agent surfaces aligned with the vault conventions.
 
 ---
 
@@ -346,12 +406,16 @@ Already using an older version of obsidian-mind (or any Obsidian vault)? The `/v
 # 1. Clone the latest obsidian-mind
 git clone https://github.com/breferrari/obsidian-mind.git ~/new-vault
 
-# 2. Open it in Claude Code
-cd ~/new-vault && claude
+# 2. Open it in your agent
+cd ~/new-vault && codex
+# or: claude
 
 # 3. Run the upgrade pointing to your old vault
 /vault-upgrade ~/my-old-vault
 ```
+
+> [!NOTE]
+> The full `vault-upgrade` automation remains Claude-first today. In Codex, use `AGENTS.md` plus `.claude/commands/vault-upgrade.md` as the workflow source if you want to run the migration manually.
 
 Claude will:
 1. **Detect** your vault version (v1–v3.2, or identify it as a non-obsidian-mind vault)
