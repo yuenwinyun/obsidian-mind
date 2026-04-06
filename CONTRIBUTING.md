@@ -25,6 +25,7 @@ When adding or modifying commands, agents, hooks, or vault structure, **all of t
 - `vault-manifest.json` version is bumped
 - CHANGELOG has the new version entry
 - `python3 scripts/test_codex_e2e.py -v` passes
+- `python3 scripts/test_release_artifact.py -v` passes
 - `python3 scripts/validate_template_metadata.py` passes
 - All infrastructure paths in the manifest actually exist (`ls` each non-glob path)
 - Examples use generic dates and names, not specific to any company or person

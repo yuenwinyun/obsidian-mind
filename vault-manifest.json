@@ -1,6 +1,6 @@
 {
   "template": "obsidian-mind",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "released": "2026-04-06",
   "infrastructure": [
     "AGENTS.md",
@@ -80,6 +80,9 @@
     },
     "v3.7": {
       "exists": ["AGENTS.md", "SOUL.md", "USER.md", "MEMORY.md", "HEARTBEAT.md", "TOOLS.md"]
+    },
+    "v3.8": {
+      "exists": ["scripts/build_release_zip.py", "scripts/test_release_artifact.py"]
     }
   },
   "frontmatter_required": {

@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.8 — 2026-04-06
+
+### Added
+- `scripts/build_release_zip.py` — shared release zip builder for local and CI packaging
+- `scripts/test_release_artifact.py` — release artifact smoke test that verifies shipped runtime files and excluded dev-only files
+
+### Changed
+- README: added a runtime support matrix and split the top-level walkthrough into Codex/OpenClaw vs Claude Code flows
+- CI trigger filters: now cover the OpenClaw root files plus `CLAUDE.md` and `brain/Skills.md`
+- release workflow: now builds the zip through the shared build script and validates the artifact contents before publishing
+- `vault-manifest.json`: bumped template version to `3.8.0` and added a `v3.8` fingerprint
+
 ## v3.7 — 2026-04-06
 
 ### Added

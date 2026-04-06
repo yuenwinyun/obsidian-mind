@@ -55,7 +55,7 @@ Defined in `.claude/commands/`. See [[Skills]] for full documentation.
 | `MEMORY.md` | **OpenClaw memory index** | Points into the vault |
 | `HEARTBEAT.md` | **OpenClaw periodic maintenance checklist** | Used for heartbeat-style checks |
 | `TOOLS.md` | **OpenClaw tool preferences** | Obsidian CLI, QMD, git, and search notes |
-| `CHANGELOG.md` | **Version history** -- tracks template releases (v1--v3.6) with what changed | Reference for upgrade paths |
+| `CHANGELOG.md` | **Version history** -- tracks template releases (v1--v3.8) with what changed | Reference for upgrade paths |
 | `bases/` | **All Bases centralized** -- dynamic views for navigation | `Work Dashboard`, `Incidents`, `People Directory`, `1-1 History`, `Review Evidence`, `Competency Map`, `Templates` |
 | `work/` | Work notes index | `Index.md` (detailed MOC) |
 | `work/active/` | **Current projects only** (1-3 files) | Move here when starting, move to archive when done |

@@ -37,6 +37,39 @@ Codex: "You're working on Project Alpha, blocked on the BE contract.
   <img src="obsidian-mind-demo.gif" alt="Obsidian Mind demo — standup and dump commands" width="800">
 </p>
 
+### Runtime Support Matrix
+
+| Runtime | Support Level | Primary Entry Surface |
+|---------|---------------|-----------------------|
+| Claude Code | Full | `CLAUDE.md` + `.claude/commands/` + hooks |
+| Codex | First-pass | `AGENTS.md` + `.codex/prompts/` |
+| OpenClaw | First-pass | `AGENTS.md` + `SOUL.md`/`USER.md`/`MEMORY.md`/`HEARTBEAT.md`/`TOOLS.md` |
+
+> [!IMPORTANT]
+> Multi-agent support is not full parity yet. Claude Code has the richest automation today. Codex and OpenClaw are supported first for startup, memory, and core daily workflows.
+
+### Codex / OpenClaw Flow
+
+**Morning kickoff:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/standup.md
+```
+
+**Brain dump after a meeting:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/dump.md with the raw meeting notes
+```
+
+**End of day:**
+
+```text
+Follow AGENTS.md, then use .codex/prompts/wrap-up.md
+```
+
+### Claude Code Flow
+
 **Morning kickoff:**
 
 ```bash
@@ -133,6 +166,11 @@ qmd update && qmd embed
 - **Codex** — repo-native `AGENTS.md` plus `.codex/prompts/standup.md`, `dump.md`, and `wrap-up.md`
 - **OpenClaw** — `AGENTS.md` plus `SOUL.md`, `USER.md`, `MEMORY.md`, `HEARTBEAT.md`, and `TOOLS.md`
 - **Claude Code** — `CLAUDE.md`, `.claude/commands/`, and automatic hooks
+
+Runtime summary:
+- Claude Code has full lifecycle automation today.
+- Codex supports the core daily workflows through prompt files.
+- OpenClaw supports startup, memory, heartbeat, and tool routing through root workspace files.
 
 ### Claude Hooks
 

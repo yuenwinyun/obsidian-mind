@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""End-to-end validation for the Codex and OpenClaw-facing vault surface."""
+"""Contract validation for the Codex and OpenClaw-facing vault surface."""
 
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import unittest
@@ -15,6 +16,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def read_text(relative_path: str) -> str:
     return (ROOT / relative_path).read_text(encoding="utf-8")
+
+
+def normalize_version(version: str) -> str:
+    parts = version.split(".")
+    while len(parts) > 1 and parts[-1] == "0":
+        parts.pop()
+    return ".".join(parts)
 
 
 class TestCodexSurface(unittest.TestCase):
@@ -69,9 +77,10 @@ class TestCodexSurface(unittest.TestCase):
         self.assertIn("AGENTS.md", manifest["infrastructure"])
         self.assertIn(".codex/**", manifest["infrastructure"])
         self.assertIn("scripts/**", manifest["infrastructure"])
-        self.assertIn("v3.7", manifest["version_fingerprints"])
+        latest_key = f"v{normalize_version(manifest['version'])}"
+        self.assertIn(latest_key, manifest["version_fingerprints"])
 
-        for relative_path in manifest["version_fingerprints"]["v3.7"]["exists"]:
+        for relative_path in manifest["version_fingerprints"][latest_key]["exists"]:
             with self.subTest(path=relative_path):
                 self.assertTrue((ROOT / relative_path).exists(), relative_path)
 
@@ -107,6 +116,13 @@ class TestCodexSurface(unittest.TestCase):
             timeout=10,
         )
         self.assertEqual(proc.returncode, 0, proc.stderr or proc.stdout)
+
+    def test_readme_declares_support_matrix(self) -> None:
+        readme = read_text("README.md")
+        self.assertIn("### Runtime Support Matrix", readme)
+        for runtime in ["Claude Code", "Codex", "OpenClaw"]:
+            with self.subTest(runtime=runtime):
+                self.assertRegex(readme, re.escape(runtime))
 
 
 if __name__ == "__main__":
